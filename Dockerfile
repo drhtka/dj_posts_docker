@@ -14,7 +14,7 @@ COPY requirements.txt ./
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-
+#https://github.com/drhtka/dj_posts_docker.git
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
