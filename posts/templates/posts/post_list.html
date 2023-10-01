@@ -7,7 +7,7 @@
 <h1>Список постов</h1>
 <ul>
     {% for post in posts %}
-        <li><a href="{% url 'post_detail' post.pk %}">{{ post.user.username }} - {{ post.created_at }}</a></li>
+        <li><a href="{% url 'post_detail' post.pk %}">{{ post.id }} - {{ post.user.username }} - {{ post.created_at }}</a></li>
     {% empty %}
         <li>Нет доступных постов.</li>
     {% endfor %}
