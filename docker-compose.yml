@@ -24,10 +24,10 @@ services:
       - db
 
   db:
-    image: mysql
+    image: postgres:14-alpine
     container_name: "posts_db_cont"
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=posts_db
-    volumes:
-      - ./data/mysql/db:/var/lib/mysql
+      - POSTGRES_DB=app
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
