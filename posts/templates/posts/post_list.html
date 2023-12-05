@@ -1,17 +1,66 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js?mode=production" crossorigin="anonymous" type="text/javascript"></script>#}
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js?mode=production" crossorigin="anonymous" type="text/javascript"></script>
     <title>Список постов</title>
 </head>
 <body>
+<style>
+    div[v-if="showAlert"] {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 10px;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+        margin-top: 10px;
+    }
+</style>
+{% if user.is_authenticated %}
+<p>Добро пожаловать, {{ user.username }}!</p>
+{% endif %}
 <h1>Список постов</h1>
 <ul>
     {% for post in posts %}
-        <li><a href="{% url 'post_detail' post.pk %}">{{ post.id }} - {{ post.user.username }} - {{ post.created_at }}</a></li>
+        <li><a href="{% url 'post_detail' post.pk %}">{{ post.id }} - {{ post.title }} - {{ post.user.username }} - {{ post.created_at }}</a></li>
     {% empty %}
         <li>Нет доступных постов.</li>
     {% endfor %}
 </ul>
 <a href="{% url 'post_create' %}">Создать новый пост</a>
+<div  id="app">
+    {{ message_from_vue }}
+</div> 11111
+<h1>{{ message_from_django }}</h1>
+{#<div id="app">#}
+{#    {{ message_from_vue }}#}
+{#    <button @click="showAlertMessage">Show Alert</button>#}
+{#</div>#}
+
+<div v-if="showAlert">
+    <p>This is an alert!</p>
+    <button @click="showAlert = false">Close Alert</button>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'Привет, Vue.js!',
+            showAlert: false,
+        },
+        methods: {
+            showAlertMessage: function () {
+                this.showAlert = true;
+            },
+        },
+        mounted: function () {
+            console.log('ter')
+            this.showAlertMessage();
+        },
+    });
+    {#alert('123')#}
+</script>
+
 </body>
 </html>

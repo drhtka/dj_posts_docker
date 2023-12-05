@@ -9,8 +9,19 @@ def post_list(request):
 
 
 def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'posts/post_detail.html', {'post': post})
+    post = Post.objects.filter(pk=pk).get()
+    print('request', request.POST)
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        print('form', form)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'posts/post_detail.html', {'form': form, 'post': post})
 
 
 def post_create(request):

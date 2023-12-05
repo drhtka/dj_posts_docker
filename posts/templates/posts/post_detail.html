@@ -4,10 +4,17 @@
     <title>Детали поста</title>
 </head>
 <body>
-<h1>Детали поста</h1>
-<p>Пользователь: {{ post.user.username }}</p>
-<p>Дата создания: {{ post.created_at }}</p>
-<p>Содержание: {{ post.content }}</p>
+{#<h1>Детали поста</h1>#}
+{#<p>Пользователь: {{ post.user.username }}</p>#}
+{#<p>Дата создания: {{ post.created_at }}</p>#}
+{#<p>Заголовок: {{ post.title }}</p>#}
+{#<p>Содержание:#}
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Save changes</button>
+</form>
+</p>
 <a href="{% url 'post_list' %}">Вернуться к списку постов</a>
 </body>
 </html>
